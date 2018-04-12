@@ -3,12 +3,10 @@ class PagesController < ApplicationController
 
   def welcome
     @header = "This is the welcome page"
-    render :welcome
   end
 
   def about
     @header = "This is the about page"
-    render :about
   end
 
   def contest
@@ -16,7 +14,7 @@ class PagesController < ApplicationController
     # render :contest
 
     flash[:notice] = "Sorry, the contest has ended"
-    redirect_to "/welcome"
+    redirect_to root_path
   end
 
   def kitten
@@ -26,9 +24,7 @@ class PagesController < ApplicationController
   end
 
   def secrets
-    if params[:magic_word] == "guru"
-      render :secrets
-    else
+    if params[:magic_word] != "guru"
       flash[:alert] = "Sorry, you're not authorized to see that page!"
       render :welcome
     end
